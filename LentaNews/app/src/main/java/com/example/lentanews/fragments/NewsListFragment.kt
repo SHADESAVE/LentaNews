@@ -8,26 +8,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.example.lentanews.*
 import com.example.lentanews.RowType.Companion.HEADER_ROW_TYPE
 import java.util.ArrayList
 
 class NewsListFragment: Fragment() {
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         val view = inflater.inflate(R.layout.fragment_news_list, container,false)
         val headerTextView : TextView = view.findViewById(R.id.headerTextView)
         val bundle = this.arguments
             headerTextView.text = bundle!!.get("header").toString()
 
-        val headers : List<RowType> = listOf (
-            HeaderRowType("hello"),
-            HeaderRowType("this"),
-            NewsRowType("is"),
-            HeaderRowType("typed"),
-            NewsRowType("list")
-        )
+        val headers : ArrayList<RowType> = arrayListOf()
+
+        var i: Int = 0
+        while (i < 20) {
+            i++
+            headers.add(NewsRowType("item"+i))
+        }
 
         val recyclerView: RecyclerView = view.findViewById(R.id.news_list_recycler_view)
+        recyclerView.setHasFixedSize(true)
         val recyclerViewAdapter = RecyclerViewAdapter(headers)
         recyclerView.adapter = recyclerViewAdapter
         val layoutManager = LinearLayoutManager(this.activity)
@@ -35,4 +39,4 @@ class NewsListFragment: Fragment() {
 
         return view
     }
-    }
+}

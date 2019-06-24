@@ -1,12 +1,14 @@
 package com.example.lentanews
 
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.support.v7.widget.RecyclerView
-import android.widget.TextView
-import android.R.attr.button
-import android.view.View
+import android.widget.TextView import android.view.View
 import android.widget.Button
+import com.example.lentanews.fragments.MainFragment
+import com.example.lentanews.fragments.NewsListFragment
 
 
 class ViewHolders {
@@ -19,7 +21,22 @@ class ViewHolders {
         init {
             headerTextView = itemView.findViewById(R.id.headers)
             button = itemView.findViewById(R.id.buttonView) as Button
+            button.setOnClickListener(View.OnClickListener { onClick(itemView)})
         }
+
+        fun onClick(v: View) {
+            val bundle = Bundle()
+            bundle.putString("header", headerTextView.text as String?)
+            val newsListFragment = NewsListFragment()
+            newsListFragment.setArguments(bundle)
+            val activity = v.context as AppCompatActivity
+
+            activity.getSupportFragmentManager().beginTransaction().replace(
+                R.id.fragment_container,
+                newsListFragment
+            ).addToBackStack(null).commit()
+        }
+
     }
 
     class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
