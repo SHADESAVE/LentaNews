@@ -2,12 +2,17 @@ package com.example.lentanews.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.lentanews.*
+import com.example.lentanews.rowtypes.HeaderRowType
+import com.example.lentanews.rowtypes.NewsRowType
+import com.example.lentanews.rowtypes.RowType
+import kotlinx.android.synthetic.main.fragment_news_list.*
 import java.util.*
 
 
@@ -49,4 +54,16 @@ class MainFragment : Fragment() {
         return view
     }
 
+    fun onClick(v: View, text: String) {
+        val bundle = Bundle()
+        bundle.putString("header", text)
+        val newsListFragment = NewsListFragment()
+        newsListFragment.setArguments(bundle)
+        val activity = v.context as AppCompatActivity
+
+        activity.getSupportFragmentManager().beginTransaction().replace(
+            R.id.fragment_container,
+            newsListFragment
+        ).addToBackStack(null).commit()
+    }
 }

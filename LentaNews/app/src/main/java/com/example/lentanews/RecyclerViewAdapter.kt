@@ -2,6 +2,7 @@ package com.example.lentanews
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import com.example.lentanews.rowtypes.RowType
 
 
 class RecyclerViewAdapter(private val dataSet: List<RowType>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -11,7 +12,7 @@ class RecyclerViewAdapter(private val dataSet: List<RowType>) : RecyclerView.Ada
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val viewHolders = ViewHolders()
+        val viewHolders = RecyclerViewHolders()
         return viewHolders.create(parent, viewType)
     }
 

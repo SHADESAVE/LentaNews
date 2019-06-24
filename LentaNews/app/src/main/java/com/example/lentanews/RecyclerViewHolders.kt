@@ -8,10 +8,11 @@ import android.support.v7.widget.RecyclerView
 import android.widget.TextView import android.view.View
 import android.widget.Button
 import com.example.lentanews.fragments.MainFragment
+import com.example.lentanews.rowtypes.RowType
 import com.example.lentanews.fragments.NewsListFragment
 
 
-class ViewHolders {
+class RecyclerViewHolders {
 
     class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -21,22 +22,11 @@ class ViewHolders {
         init {
             headerTextView = itemView.findViewById(R.id.headers)
             button = itemView.findViewById(R.id.buttonView) as Button
-            button.setOnClickListener(View.OnClickListener { onClick(itemView)})
+            val mainFragment = MainFragment()
+            button.setOnClickListener {
+                mainFragment.onClick(itemView, headerTextView.text as String)
+            }
         }
-
-        fun onClick(v: View) {
-            val bundle = Bundle()
-            bundle.putString("header", headerTextView.text as String?)
-            val newsListFragment = NewsListFragment()
-            newsListFragment.setArguments(bundle)
-            val activity = v.context as AppCompatActivity
-
-            activity.getSupportFragmentManager().beginTransaction().replace(
-                R.id.fragment_container,
-                newsListFragment
-            ).addToBackStack(null).commit()
-        }
-
     }
 
     class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

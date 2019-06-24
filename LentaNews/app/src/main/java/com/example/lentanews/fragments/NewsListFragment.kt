@@ -2,15 +2,17 @@ package com.example.lentanews.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import com.example.lentanews.*
-import com.example.lentanews.RowType.Companion.HEADER_ROW_TYPE
+import com.example.lentanews.rowtypes.NewsRowType
+import com.example.lentanews.rowtypes.RowType
+import kotlinx.android.synthetic.main.fragment_news_list.*
 import java.util.ArrayList
 
 class NewsListFragment: Fragment() {
@@ -27,7 +29,7 @@ class NewsListFragment: Fragment() {
         var i: Int = 0
         while (i < 20) {
             i++
-            headers.add(NewsRowType("item"+i))
+            headers.add(NewsRowType("item" + i))
         }
 
         val recyclerView: RecyclerView = view.findViewById(R.id.news_list_recycler_view)

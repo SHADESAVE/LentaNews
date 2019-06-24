@@ -1,11 +1,7 @@
-package com.example.lentanews
+package com.example.lentanews.rowtypes
 
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
-import android.view.View;
-import android.widget.Toast
-import com.example.lentanews.fragments.NewsListFragment
+import com.example.lentanews.RecyclerViewHolders
 
 
 class HeaderRowType(val header: String) : RowType {
@@ -30,7 +26,7 @@ class HeaderRowType(val header: String) : RowType {
 //    }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder) {
-        val textViewHolder = viewHolder as ViewHolders.HeaderViewHolder
+        val textViewHolder = viewHolder as RecyclerViewHolders.HeaderViewHolder
         textViewHolder.headerTextView.setText(header)
     }
 }

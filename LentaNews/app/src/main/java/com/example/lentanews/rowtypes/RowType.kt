@@ -1,4 +1,4 @@
-package com.example.lentanews
+package com.example.lentanews.rowtypes
 
 import android.support.v7.widget.RecyclerView
 
