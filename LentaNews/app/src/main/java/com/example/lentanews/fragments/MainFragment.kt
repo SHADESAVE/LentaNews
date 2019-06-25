@@ -16,8 +16,7 @@ import com.example.lentanews.rowtypes.RowType
 import kotlinx.android.synthetic.main.fragment_news_list.*
 import java.util.*
 import android.support.v7.widget.GridLayoutManager
-
-
+import android.widget.LinearLayout
 
 
 class MainFragment : Fragment() {
@@ -51,8 +50,15 @@ class MainFragment : Fragment() {
         val recyclerViewAdapter = RecyclerViewAdapter(mainList)
         recyclerView.adapter = recyclerViewAdapter
 
+        val manager = GridLayoutManager(this.context, 2)
+        manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return if (position > 5 && position != 10Ы) 1 else 2
+            }
+        }
+
         val layoutManager = LinearLayoutManager(this.activity)
-        recyclerView.layoutManager = layoutManager
+        recyclerView.layoutManager = manager
 
 
         return view

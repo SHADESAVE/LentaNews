@@ -8,10 +8,15 @@ import android.view.ViewGroup
 import android.support.v7.widget.RecyclerView
 import android.widget.TextView import android.view.View
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import com.example.lentanews.fragments.MainFragment
 import com.example.lentanews.rowtypes.RowType
 import com.example.lentanews.fragments.NewsListFragment
+import kotlinx.android.synthetic.main.recycler_view_news_horizontal.view.*
+import android.support.v7.widget.LinearLayoutManager
+
+
 
 
 class RecyclerViewHolders {
@@ -44,14 +49,16 @@ class RecyclerViewHolders {
     class NewsHorizontalViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var textView2: TextView
-        val relativeLayout: RelativeLayout
 
         init {
-            textView2 = itemView.findViewById(R.id.textView2)
-            relativeLayout = itemView.findViewById(R.id.horizRelative)
-            itemView.layoutParams.width = 500
-            val gridLayoutManager: GridLayoutManager = GridLayoutManager(itemView.context, 2)
+            //LinearLayoutManager(LinearLayout.HORIZONTAL, false)
+            LinearLayout.HORIZONTAL
+            //recyclerView.layoutManager = layoutManager
 
+
+            textView2 = itemView.findViewById(R.id.textView2)
+            itemView.layoutParams.width = 500
+            LinearLayout.HORIZONTAL
         }
 
     }
