@@ -21,6 +21,7 @@ import android.widget.LinearLayout
 
 class MainFragment : Fragment() {
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_main, container, false)
@@ -32,15 +33,11 @@ class MainFragment : Fragment() {
             NewsRowType("item3"),
             NewsRowType("item4"),
             HeaderRowType("Last24"),
-            NewsHorizontalRowType("itemH1"),
-            NewsHorizontalRowType("itemH2"),
-            NewsHorizontalRowType("itemH3"),
-            NewsHorizontalRowType("itemH4"),
+            NewsHorizontalRowType("itemH1", "itemH2"),
+            NewsHorizontalRowType("itemH3", "itemH4"),
             HeaderRowType("All"),
-            NewsHorizontalRowType("itemH1"),
-            NewsHorizontalRowType("itemH2"),
-            NewsHorizontalRowType("itemH3"),
-            NewsHorizontalRowType("itemH4")
+            NewsHorizontalRowType("itemH1", "itemH2"),
+            NewsHorizontalRowType("itemH3", "itemH4")
 
         )
 
@@ -49,17 +46,8 @@ class MainFragment : Fragment() {
 
         val recyclerViewAdapter = RecyclerViewAdapter(mainList)
         recyclerView.adapter = recyclerViewAdapter
-
-        val manager = GridLayoutManager(this.context, 2)
-        manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return if (position > 5 && position != 10Ы) 1 else 2
-            }
-        }
-
         val layoutManager = LinearLayoutManager(this.activity)
-        recyclerView.layoutManager = manager
-
+        recyclerView.layoutManager = layoutManager
 
         return view
     }

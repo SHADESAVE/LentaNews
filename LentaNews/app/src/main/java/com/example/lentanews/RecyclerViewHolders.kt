@@ -48,17 +48,11 @@ class RecyclerViewHolders {
 
     class NewsHorizontalViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var textView2: TextView
-
+        var textView2_left: TextView
+        var textView2_right: TextView
         init {
-            //LinearLayoutManager(LinearLayout.HORIZONTAL, false)
-            LinearLayout.HORIZONTAL
-            //recyclerView.layoutManager = layoutManager
-
-
-            textView2 = itemView.findViewById(R.id.textView2)
-            itemView.layoutParams.width = 500
-            LinearLayout.HORIZONTAL
+            textView2_left = itemView.findViewById(R.id.textView2_left)
+            textView2_right = itemView.findViewById(R.id.textView2_right)
         }
 
     }
@@ -80,7 +74,7 @@ class RecyclerViewHolders {
 
             RowType.NEWS_HORIZONTAL_ROW_TYPE -> {
                 val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.recycler_view_news_horizontal, parent, false)
+                    .inflate(R.layout.recycler_view_news_horiz, parent, false)
                 return NewsHorizontalViewHolder(view)
             }
 
