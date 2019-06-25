@@ -3,7 +3,6 @@ package com.example.lentanews.fragments
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +12,7 @@ import com.example.lentanews.rowtypes.HeaderRowType
 import com.example.lentanews.rowtypes.NewsHorizontalRowType
 import com.example.lentanews.rowtypes.NewsRowType
 import com.example.lentanews.rowtypes.RowType
-import kotlinx.android.synthetic.main.fragment_news_list.*
 import java.util.*
-import android.support.v7.widget.GridLayoutManager
-import android.widget.LinearLayout
 
 
 class MainFragment : Fragment() {
@@ -33,20 +29,25 @@ class MainFragment : Fragment() {
             NewsRowType("item3"),
             NewsRowType("item4"),
             HeaderRowType("Last24"),
-            NewsHorizontalRowType("itemH1", "itemH2"),
-            NewsHorizontalRowType("itemH3", "itemH4"),
+            NewsHorizontalRowType("itemH1"),
+            NewsHorizontalRowType("itemH2"),
+            NewsHorizontalRowType("itemH3"),
+            NewsHorizontalRowType("itemH4"),
             HeaderRowType("All"),
-            NewsHorizontalRowType("itemH1", "itemH2"),
-            NewsHorizontalRowType("itemH3", "itemH4")
+            NewsHorizontalRowType("itemH1"),
+            NewsHorizontalRowType("itemH2"),
+            NewsHorizontalRowType("itemH3"),
+            NewsHorizontalRowType("itemH4")
 
-        )
+            )
 
         val recyclerView: RecyclerView = view!!.findViewById(R.id.main_recycler_view) as RecyclerView
         recyclerView.setHasFixedSize(true)
 
         val recyclerViewAdapter = RecyclerViewAdapter(mainList)
         recyclerView.adapter = recyclerViewAdapter
-        val layoutManager = LinearLayoutManager(this.activity)
+
+        val layoutManager = recyclerViewAdapter.getLayoutManager(context!!)
         recyclerView.layoutManager = layoutManager
 
         return view
