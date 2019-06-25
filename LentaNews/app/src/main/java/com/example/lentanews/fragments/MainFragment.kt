@@ -15,6 +15,9 @@ import com.example.lentanews.rowtypes.NewsRowType
 import com.example.lentanews.rowtypes.RowType
 import kotlinx.android.synthetic.main.fragment_news_list.*
 import java.util.*
+import android.support.v7.widget.GridLayoutManager
+
+
 
 
 class MainFragment : Fragment() {
@@ -44,8 +47,10 @@ class MainFragment : Fragment() {
 
         val recyclerView: RecyclerView = view!!.findViewById(R.id.main_recycler_view) as RecyclerView
         recyclerView.setHasFixedSize(true)
+
         val recyclerViewAdapter = RecyclerViewAdapter(mainList)
         recyclerView.adapter = recyclerViewAdapter
+
         val layoutManager = LinearLayoutManager(this.activity)
         recyclerView.layoutManager = layoutManager
 

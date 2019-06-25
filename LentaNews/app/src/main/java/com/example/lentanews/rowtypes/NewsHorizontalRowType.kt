@@ -1,6 +1,7 @@
 package com.example.lentanews.rowtypes
 
 import android.support.v7.widget.RecyclerView
+import android.widget.RelativeLayout
 import com.example.lentanews.RecyclerViewHolders
 
 class NewsHorizontalRowType(val news : String) : RowType {

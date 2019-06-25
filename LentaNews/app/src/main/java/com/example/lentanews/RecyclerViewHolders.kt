@@ -2,11 +2,13 @@ package com.example.lentanews
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.support.v7.widget.RecyclerView
 import android.widget.TextView import android.view.View
 import android.widget.Button
+import android.widget.RelativeLayout
 import com.example.lentanews.fragments.MainFragment
 import com.example.lentanews.rowtypes.RowType
 import com.example.lentanews.fragments.NewsListFragment
@@ -42,9 +44,14 @@ class RecyclerViewHolders {
     class NewsHorizontalViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var textView2: TextView
+        val relativeLayout: RelativeLayout
 
         init {
             textView2 = itemView.findViewById(R.id.textView2)
+            relativeLayout = itemView.findViewById(R.id.horizRelative)
+            itemView.layoutParams.width = 500
+            val gridLayoutManager: GridLayoutManager = GridLayoutManager(itemView.context, 2)
+
         }
 
     }
