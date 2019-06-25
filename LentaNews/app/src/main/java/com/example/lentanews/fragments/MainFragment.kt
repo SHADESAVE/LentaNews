@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.lentanews.*
 import com.example.lentanews.rowtypes.HeaderRowType
+import com.example.lentanews.rowtypes.NewsHorizontalRowType
 import com.example.lentanews.rowtypes.NewsRowType
 import com.example.lentanews.rowtypes.RowType
 import kotlinx.android.synthetic.main.fragment_news_list.*
@@ -22,8 +23,6 @@ class MainFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
-        val news : ArrayList<RowType> = arrayListOf()
-        val headers : ArrayList<RowType> = arrayListOf()
         val mainList : ArrayList<RowType> = arrayListOf(
             HeaderRowType("Top7"),
             NewsRowType("item1"),
@@ -31,15 +30,15 @@ class MainFragment : Fragment() {
             NewsRowType("item3"),
             NewsRowType("item4"),
             HeaderRowType("Last24"),
-            NewsRowType("item1"),
-            NewsRowType("item2"),
-            NewsRowType("item3"),
-            NewsRowType("item4"),
+            NewsHorizontalRowType("itemH1"),
+            NewsHorizontalRowType("itemH2"),
+            NewsHorizontalRowType("itemH3"),
+            NewsHorizontalRowType("itemH4"),
             HeaderRowType("All"),
-            NewsRowType("item1"),
-            NewsRowType("item2"),
-            NewsRowType("item3"),
-            NewsRowType("item4")
+            NewsHorizontalRowType("itemH1"),
+            NewsHorizontalRowType("itemH2"),
+            NewsHorizontalRowType("itemH3"),
+            NewsHorizontalRowType("itemH4")
 
         )
 

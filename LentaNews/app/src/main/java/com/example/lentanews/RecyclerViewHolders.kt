@@ -39,6 +39,16 @@ class RecyclerViewHolders {
 
     }
 
+    class NewsHorizontalViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        var textView2: TextView
+
+        init {
+            textView2 = itemView.findViewById(R.id.textView2)
+        }
+
+    }
+
     fun create(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         when (viewType) {
@@ -53,6 +63,13 @@ class RecyclerViewHolders {
                     .inflate(R.layout.recycler_view_news, parent, false)
                 return NewsViewHolder(view)
             }
+
+            RowType.NEWS_HORIZONTAL_ROW_TYPE -> {
+                val view = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.recycler_view_news_horizontal, parent, false)
+                return NewsHorizontalViewHolder(view)
+            }
+
             else ->  {
                 val view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.recycler_view_news, parent, false)
