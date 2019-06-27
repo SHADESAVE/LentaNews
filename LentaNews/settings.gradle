@@ -1,1 +1,1 @@
-include ':app', ':NetworkModule'
+include ':app',':rssmodule'

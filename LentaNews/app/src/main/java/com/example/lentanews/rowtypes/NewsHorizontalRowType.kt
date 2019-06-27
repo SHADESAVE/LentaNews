@@ -13,7 +13,7 @@ class NewsHorizontalRowType(val news : String) : RowType {
         return RowType.NEWS_HORIZONTAL_ROW_TYPE
     }
 
-    override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder) {
+    override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         val textViewHolder = viewHolder as RecyclerViewHolders.NewsHorizontalViewHolder
         textViewHolder.textView2.setText(news)
     }

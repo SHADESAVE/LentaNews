@@ -21,7 +21,7 @@ class RecyclerViewAdapter(private val dataSet: List<RowType>) : RecyclerView.Ada
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        dataSet[position].onBindViewHolder(holder)
+        dataSet[position].onBindViewHolder(holder, position)
     }
 
     override fun getItemCount(): Int {

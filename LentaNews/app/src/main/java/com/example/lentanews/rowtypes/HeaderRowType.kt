@@ -9,7 +9,7 @@ class HeaderRowType(val header: String) : RowType {
         return RowType.HEADER_ROW_TYPE
     }
 
-    override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder) {
+    override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         val textViewHolder = viewHolder as RecyclerViewHolders.HeaderViewHolder
         textViewHolder.headerTextView.setText(header)
     }

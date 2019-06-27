@@ -7,7 +7,7 @@ interface RowType {
 
     fun getItemViewType(): Int
 
-    fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder)
+    fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position : Int)
 
     companion object {
         const val HEADER_ROW_TYPE = 0
