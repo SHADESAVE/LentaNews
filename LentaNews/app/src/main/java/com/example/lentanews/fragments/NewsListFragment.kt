@@ -1,10 +1,11 @@
 package com.example.lentanews.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +13,11 @@ import android.widget.TextView
 import com.example.lentanews.*
 import com.example.lentanews.rowtypes.NewsRowType
 import com.example.lentanews.rowtypes.RowType
-import kotlinx.android.synthetic.main.fragment_news_list.*
 import java.util.ArrayList
+import android.os.AsyncTask
+import com.example.rssmodule.FeedItem
+import com.example.rssmodule.ReadRss
+
 
 class NewsListFragment: Fragment() {
 
@@ -21,24 +25,67 @@ class NewsListFragment: Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_news_list, container,false)
         val headerTextView : TextView = view.findViewById(R.id.headerTextView)
-        val bundle = this.arguments
-            headerTextView.text = bundle!!.get("header").toString()
+        val bundle: Bundle? = this.arguments
+        val header = bundle?.getString("header")
+        headerTextView.text = header
 
-        val headers : ArrayList<RowType> = arrayListOf()
+        var feedItem = arrayListOf<FeedItem>()
 
-        var i: Int = 0
-        while (i < 20) {
-            i++
-            headers.add(NewsRowType("item" + i))
+        when (header) {
+            "Top7" -> feedItem = (activity as MainActivity).feedItemTop7
+            "Last24" -> feedItem = (activity as MainActivity).feedItemLast24
+            "All" -> feedItem = (activity as MainActivity).feedItemAll
+
         }
 
-        val recyclerView: RecyclerView = view.findViewById(R.id.news_list_recycler_view)
+        val newsList: ArrayList<RowType> = arrayListOf()
+        for (i in 0..feedItem!!.size - 1) {
+            newsList.add(NewsRowType(feedItem[i].title))
+        }
+
+        val recyclerView: RecyclerView = view!!.findViewById(R.id.news_list_recycler_view)
+
         recyclerView.setHasFixedSize(true)
-        val recyclerViewAdapter = RecyclerViewAdapter(headers)
+        val recyclerViewAdapter = RecyclerViewAdapter(newsList)
         recyclerView.adapter = recyclerViewAdapter
+
         val layoutManager = LinearLayoutManager(this.activity)
         recyclerView.layoutManager = layoutManager
 
+//        val asyncRequest = AsyncRequest(adress, context)
+//        asyncRequest.execute()
+
         return view
+    }
+    inner class AsyncRequest(val adress: String,val context : Context?): AsyncTask<Void, Void, Void>() {
+        val rssParser = ReadRss()
+
+        override fun onPreExecute() {
+            super.onPreExecute()
+        }
+
+        override fun doInBackground(vararg params: Void): Void? {
+            rssParser.ProcessXml(rssParser.Getdata(adress))
+            return null
+        }
+
+        override fun onPostExecute(result: Void?) {
+
+            val feedItem = rssParser.getFeedItemts()
+            Log.d("feedItem", "SecondFragmentSize "+feedItem.size)
+
+//            val newsList: ArrayList<RowType> = arrayListOf()
+//            for (i in 0..feedItem!!.size - 1) {
+//                newsList.add(NewsRowType(feedItem[i].title))
+//            }
+//
+//            val recyclerView: RecyclerView = view!!.findViewById(R.id.news_list_recycler_view)
+//            recyclerView.setHasFixedSize(true)
+//            val recyclerViewAdapter = RecyclerViewAdapter(newsList)
+//            recyclerView.adapter = recyclerViewAdapter
+//            val layoutManager = LinearLayoutManager(this.context)
+//            recyclerView.layoutManager = layoutManager
+            super.onPostExecute(result)
+        }
     }
 }

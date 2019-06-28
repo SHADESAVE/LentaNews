@@ -1,6 +1,9 @@
 package com.example.rssmodule
 
-class FeedItem {
+import android.os.Parcel
+import android.os.Parcelable
+
+class FeedItem() {
     var title: String = ""
     var link: String = ""
     var description: String = ""

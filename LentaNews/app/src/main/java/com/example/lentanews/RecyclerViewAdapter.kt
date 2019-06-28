@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.example.lentanews.rowtypes.NewsHorizontalRowType
 import com.example.lentanews.rowtypes.RowType
+import com.example.rssmodule.FeedItem
 
 
 class RecyclerViewAdapter(private val dataSet: List<RowType>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView
 import com.example.lentanews.RecyclerViewHolders
 
 
-class NewsRowType(val news: String): RowType {
+class NewsRowType(val tittle: String): RowType {
 
     override fun getItemViewType(): Int {
         return RowType.NEWS_ROW_TYPE
@@ -13,6 +13,6 @@ class NewsRowType(val news: String): RowType {
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position : Int) {
         val textViewHolder = viewHolder as RecyclerViewHolders.NewsViewHolder
 
-        textViewHolder.textView1.setText(news)
+        textViewHolder.textView1.setText(tittle)
     }
 }

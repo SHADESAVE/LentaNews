@@ -15,8 +15,7 @@ import com.example.lentanews.rowtypes.RowType
 import com.example.lentanews.fragments.NewsListFragment
 import kotlinx.android.synthetic.main.recycler_view_news_horizontal.view.*
 import android.support.v7.widget.LinearLayoutManager
-
-
+import com.example.rssmodule.FeedItem
 
 
 class RecyclerViewHolders {
@@ -51,11 +50,6 @@ class RecyclerViewHolders {
         var textView2: TextView
         init {
             textView2 = itemView.findViewById(R.id.textView2)
-
-//            val recyclerView = itemView.parent as RecyclerView
-//            val gridLayoutManager = recyclerView.layoutManager as GridLayoutManager?
-//            val spanSize = gridLayoutManager!!.spanSizeLookup.getSpanSize(layoutPosition)
-//            g
         }
 
     }

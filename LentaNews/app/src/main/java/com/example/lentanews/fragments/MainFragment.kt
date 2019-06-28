@@ -14,25 +14,26 @@ import com.example.lentanews.rowtypes.HeaderRowType
 import com.example.lentanews.rowtypes.NewsHorizontalRowType
 import com.example.lentanews.rowtypes.NewsRowType
 import com.example.lentanews.rowtypes.RowType
-import java.util.*
 import com.example.rssmodule.FeedItem
 import com.example.rssmodule.ReadRss
-
-
-
-
+import kotlin.collections.ArrayList
+import android.app.Activity
 
 
 
 
 class MainFragment : Fragment() {
 
+    var mActivity: Activity? = null
+
+    override fun onAttach(activity: Activity) {
+        super.onAttach(activity)
+        mActivity = activity
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_main, container, false)
-
-        val feedUrl = "http://www.sciencemag.org/rss/news_current.xml"
 
         val asyncRequest = AsyncRequest()
         asyncRequest.execute()
@@ -41,11 +42,12 @@ class MainFragment : Fragment() {
     }
 
     fun onClick(v: View, text: String) {
-        val bundle = Bundle()
-        bundle.putString("header", text)
         val newsListFragment = NewsListFragment()
-        newsListFragment.setArguments(bundle)
         val activity = v.context as AppCompatActivity
+        val bundle = Bundle()
+
+        bundle.putString("header", text)
+        newsListFragment.setArguments(bundle)
 
         activity.getSupportFragmentManager().beginTransaction().replace(
             R.id.fragment_container,
@@ -54,43 +56,58 @@ class MainFragment : Fragment() {
     }
 
     inner class AsyncRequest() : AsyncTask<Void, Void, Void>() {
-        val rssParser = ReadRss()
+        val rssParserTop7 = ReadRss()
+        val rssParserLast24 = ReadRss()
+        val rssParserAll = ReadRss()
 
         override fun onPreExecute() {
             super.onPreExecute()
         }
 
         override fun doInBackground(vararg voids: Void): Void? {
-            rssParser.ProcessXml(rssParser.Getdata())
+            rssParserTop7.ProcessXml(rssParserTop7.Getdata("https://lenta.ru/rss/top7"))
+            rssParserLast24.ProcessXml(rssParserLast24.Getdata("https://lenta.ru/rss/last24"))
+            rssParserAll.ProcessXml(rssParserTop7.Getdata("https://lenta.ru/rss/news"))
             return null
         }
 
         override fun onPostExecute(aVoid: Void?) {
             super.onPostExecute(aVoid)
 
-            val feedItem = rssParser.getFeedTiemts()
-            Log.d("feedItem", "size "+feedItem.size)
+            val feedItemTop7 = rssParserTop7.getFeedItemts()
+            Log.d("feedTop7", "size "+feedItemTop7.size)
+
+            val feedItemLast24 = rssParserLast24.getFeedItemts()
+            Log.d("feedLast24", "size "+feedItemLast24.size)
+
+            val feedItemAll = rssParserAll.getFeedItemts()
+            Log.d("feedAll", "size "+feedItemAll.size)
 
             val mainList : ArrayList<RowType> = arrayListOf(
-                HeaderRowType("Best7"),
-                NewsRowType(feedItem[0].title),
-                NewsRowType(feedItem[1].title),
-                NewsRowType(feedItem[2].title),
-                NewsRowType(feedItem[3].title),
+                HeaderRowType("Top7"),
+                NewsRowType(feedItemTop7[0].title),
+                NewsRowType(feedItemTop7[1].title),
+                NewsRowType(feedItemTop7[2].title),
+                NewsRowType(feedItemTop7[3].title),
                 HeaderRowType("Last24"),
-                NewsHorizontalRowType("itemH1"),
-                NewsHorizontalRowType("itemH2"),
-                NewsHorizontalRowType("itemH3"),
-                NewsHorizontalRowType("itemH4"),
+                NewsHorizontalRowType(feedItemLast24[0].title),
+                NewsHorizontalRowType(feedItemLast24[1].title),
+                NewsHorizontalRowType(feedItemLast24[2].title),
+                NewsHorizontalRowType(feedItemLast24[3].title),
                 HeaderRowType("All"),
-                NewsHorizontalRowType("itemH1"),
-                NewsHorizontalRowType("itemH2"),
-                NewsHorizontalRowType("itemH3"),
-                NewsHorizontalRowType("itemH4")
-
+                NewsHorizontalRowType(feedItemAll[0].title),
+                NewsHorizontalRowType(feedItemAll[1].title),
+                NewsHorizontalRowType(feedItemAll[2].title),
+                NewsHorizontalRowType(feedItemAll[3].title)
             )
 
+            (activity as MainActivity).feedItemTop7 = feedItemTop7
+            (activity as MainActivity).feedItemLast24 = feedItemLast24
+            (activity as MainActivity).feedItemAll = feedItemAll
+            Log.d("main","size "+ (activity as MainActivity).feedItemTop7.size)
+
             val recyclerView: RecyclerView = view!!.findViewById(R.id.main_recycler_view) as RecyclerView
+            recyclerView.setHasFixedSize(true)
 
             val recyclerViewAdapter = RecyclerViewAdapter(mainList)
             recyclerView.adapter = recyclerViewAdapter

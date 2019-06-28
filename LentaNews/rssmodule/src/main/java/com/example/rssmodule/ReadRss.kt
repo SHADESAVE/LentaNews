@@ -10,10 +10,10 @@ import javax.xml.parsers.DocumentBuilderFactory
 
 class ReadRss(){
 
-    val address = "https://lenta.ru/rss/top7"
+    //val address = "https://lenta.ru/rss/top7"
     var feedItems: ArrayList<FeedItem> = arrayListOf()
 
-    fun getFeedTiemts(): ArrayList<FeedItem> {
+    fun getFeedItemts(): ArrayList<FeedItem> {
         return feedItems
     }
     fun ProcessXml(data: Document?) {
@@ -58,7 +58,7 @@ class ReadRss(){
     }
 
     //This method will download rss feed document from specified url
-    fun Getdata(): Document? {
+    fun Getdata(address: String): Document? {
         try {
             val url = URL(address)
             val connection = url.openConnection() as HttpURLConnection
