@@ -4,8 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.support.v7.widget.RecyclerView
 import android.widget.TextView import android.view.View
+import android.widget.AdapterView
 import android.widget.Button
 import com.example.lentanews.fragments.MainFragment
+import com.example.lentanews.rowtypes.NewsRowType
 import com.example.lentanews.rowtypes.RowType
 
 
@@ -20,8 +22,9 @@ class RecyclerViewHolders {
         init {
             headerTextView = itemView.findViewById(R.id.headers)
             button = itemView.findViewById(R.id.buttonView) as Button
-            val mainFragment = MainFragment()
+
             button.setOnClickListener {
+                val mainFragment = MainFragment()
                 mainFragment.onClick(itemView, headerTextView.text as String)
             }
         }
@@ -35,6 +38,11 @@ class RecyclerViewHolders {
         init {
             textTittle = itemView.findViewById(R.id.textTittle)
             textDescription = itemView.findViewById(R.id.textDescription)
+
+            itemView.setOnClickListener{
+                val mainFragment = MainFragment()
+                mainFragment.onItemClick(itemView, adapterPosition)
+            }
         }
 
     }

@@ -14,14 +14,16 @@ import com.example.lentanews.rowtypes.HeaderRowType
 import com.example.lentanews.rowtypes.NewsHorizontalRowType
 import com.example.lentanews.rowtypes.NewsRowType
 import com.example.lentanews.rowtypes.RowType
-import com.example.rssmodule.FeedItem
 import com.example.rssmodule.ReadRss
 import kotlin.collections.ArrayList
-import android.app.Activity
 import android.support.v7.app.AlertDialog
 
 
 class MainFragment : Fragment() {
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -47,7 +49,22 @@ class MainFragment : Fragment() {
         ).addToBackStack(null).commit()
     }
 
+    fun onItemClick(v: View, position: Int) {
+        val webFragment = WebViewFragment()
+        val activity = v.context as AppCompatActivity
+        val bundle = Bundle()
+
+        bundle.putString("link", (activity as MainActivity).mainList[position].getLink())
+        webFragment.setArguments(bundle)
+
+        activity.getSupportFragmentManager().beginTransaction().replace(
+            R.id.fragment_container,
+            webFragment
+        ).addToBackStack(null).commit()
+    }
+
     inner class AsyncRequest() : AsyncTask<Void, Void, Void>() {
+
         val rssParserTop7 = ReadRss()
         val rssParserLast24 = ReadRss()
         val rssParserAll = ReadRss()
@@ -83,16 +100,16 @@ class MainFragment : Fragment() {
 
             val feedItemAll = rssParserAll.getFeedItemts()
             Log.d("feedAll", "size "+feedItemAll.size)
-            Log.d("feedDescription", " "+feedItemTop7[0].description)
+            Log.d("feedDescriptionAndLink", "D: \n"+feedItemTop7[0].description + "L: \n"+feedItemTop7[0].link)
 
 
             //Обработать size
             val mainList : ArrayList<RowType> = arrayListOf(
                 HeaderRowType("Top7"),
-                NewsRowType(feedItemTop7[0].title, feedItemTop7[0].description),
-                NewsRowType(feedItemTop7[1].title, feedItemTop7[1].description),
-                NewsRowType(feedItemTop7[2].title, feedItemTop7[2].description),
-                NewsRowType(feedItemTop7[3].title, feedItemTop7[3].description),
+                NewsRowType(feedItemTop7[0].title, feedItemTop7[0].description, feedItemTop7[0].link),
+                NewsRowType(feedItemTop7[1].title, feedItemTop7[1].description, feedItemTop7[1].link),
+                NewsRowType(feedItemTop7[2].title, feedItemTop7[2].description, feedItemTop7[2].link),
+                NewsRowType(feedItemTop7[3].title, feedItemTop7[3].description, feedItemTop7[3].link),
                 HeaderRowType("Last24"),
                 NewsHorizontalRowType(feedItemLast24[0].title, feedItemLast24[0].description),
                 NewsHorizontalRowType(feedItemLast24[1].title, feedItemLast24[1].description),
@@ -105,6 +122,7 @@ class MainFragment : Fragment() {
                 NewsHorizontalRowType(feedItemAll[3].title, feedItemAll[3].description)
             )
 
+            (activity as MainActivity).mainList = mainList
             (activity as MainActivity).feedItemTop7 = feedItemTop7
             (activity as MainActivity).feedItemLast24 = feedItemLast24
             (activity as MainActivity).feedItemAll = feedItemAll
@@ -112,6 +130,7 @@ class MainFragment : Fragment() {
 
             val recyclerView: RecyclerView = view!!.findViewById(R.id.main_recycler_view) as RecyclerView
             recyclerView.setHasFixedSize(true)
+
 
             val recyclerViewAdapter = RecyclerViewAdapter(mainList)
             recyclerView.adapter = recyclerViewAdapter
