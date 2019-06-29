@@ -40,7 +40,7 @@ class NewsListFragment: Fragment() {
 
         val newsList: ArrayList<RowType> = arrayListOf()
         for (i in 0..feedItem!!.size - 1) {
-            newsList.add(NewsRowType(feedItem[i].title))
+            newsList.add(NewsRowType(feedItem[i].title, feedItem[i].description))
         }
 
         val recyclerView: RecyclerView = view!!.findViewById(R.id.news_list_recycler_view)
@@ -52,40 +52,6 @@ class NewsListFragment: Fragment() {
         val layoutManager = LinearLayoutManager(this.activity)
         recyclerView.layoutManager = layoutManager
 
-//        val asyncRequest = AsyncRequest(adress, context)
-//        asyncRequest.execute()
-
         return view
-    }
-    inner class AsyncRequest(val adress: String,val context : Context?): AsyncTask<Void, Void, Void>() {
-        val rssParser = ReadRss()
-
-        override fun onPreExecute() {
-            super.onPreExecute()
-        }
-
-        override fun doInBackground(vararg params: Void): Void? {
-            rssParser.ProcessXml(rssParser.Getdata(adress))
-            return null
-        }
-
-        override fun onPostExecute(result: Void?) {
-
-            val feedItem = rssParser.getFeedItemts()
-            Log.d("feedItem", "SecondFragmentSize "+feedItem.size)
-
-//            val newsList: ArrayList<RowType> = arrayListOf()
-//            for (i in 0..feedItem!!.size - 1) {
-//                newsList.add(NewsRowType(feedItem[i].title))
-//            }
-//
-//            val recyclerView: RecyclerView = view!!.findViewById(R.id.news_list_recycler_view)
-//            recyclerView.setHasFixedSize(true)
-//            val recyclerViewAdapter = RecyclerViewAdapter(newsList)
-//            recyclerView.adapter = recyclerViewAdapter
-//            val layoutManager = LinearLayoutManager(this.context)
-//            recyclerView.layoutManager = layoutManager
-            super.onPostExecute(result)
-        }
     }
 }

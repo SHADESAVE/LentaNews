@@ -10,13 +10,22 @@
         <LinearLayout android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_margin="2dp"
-                      android:orientation="horizontal">
+                      android:orientation="vertical">
 
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                      android:id="@+id/textView2"
-                      android:text="TestTex"
+                      android:id="@+id/textTittleHoriz"
+                      android:text="TestText"
                       android:textSize="15sp"
-                      android:textColor="@android:color/black"/>
+                      android:textStyle="bold"
+                      android:textColor="@android:color/black"
+            />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:id="@+id/textDescriptionHoriz"
+                      android:text="TestText"
+                      android:textSize="12sp"
+                      android:textColor="@android:color/black"
+            />
+
 
         </LinearLayout>
 

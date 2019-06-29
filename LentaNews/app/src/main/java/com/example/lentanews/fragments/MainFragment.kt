@@ -18,18 +18,10 @@ import com.example.rssmodule.FeedItem
 import com.example.rssmodule.ReadRss
 import kotlin.collections.ArrayList
 import android.app.Activity
-
-
+import android.support.v7.app.AlertDialog
 
 
 class MainFragment : Fragment() {
-
-    var mActivity: Activity? = null
-
-    override fun onAttach(activity: Activity) {
-        super.onAttach(activity)
-        mActivity = activity
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -59,9 +51,17 @@ class MainFragment : Fragment() {
         val rssParserTop7 = ReadRss()
         val rssParserLast24 = ReadRss()
         val rssParserAll = ReadRss()
+        val dialog: AlertDialog
 
+        init {
+            val builder = AlertDialog.Builder(context!!)
+            builder.setView(R.layout.progress_dialog)
+            builder.setCancelable(false);
+            dialog = builder.create()
+        }
         override fun onPreExecute() {
             super.onPreExecute()
+            dialog.show()
         }
 
         override fun doInBackground(vararg voids: Void): Void? {
@@ -73,6 +73,7 @@ class MainFragment : Fragment() {
 
         override fun onPostExecute(aVoid: Void?) {
             super.onPostExecute(aVoid)
+            dialog.dismiss()
 
             val feedItemTop7 = rssParserTop7.getFeedItemts()
             Log.d("feedTop7", "size "+feedItemTop7.size)
@@ -82,23 +83,26 @@ class MainFragment : Fragment() {
 
             val feedItemAll = rssParserAll.getFeedItemts()
             Log.d("feedAll", "size "+feedItemAll.size)
+            Log.d("feedDescription", " "+feedItemTop7[0].description)
 
+
+            //Обработать size
             val mainList : ArrayList<RowType> = arrayListOf(
                 HeaderRowType("Top7"),
-                NewsRowType(feedItemTop7[0].title),
-                NewsRowType(feedItemTop7[1].title),
-                NewsRowType(feedItemTop7[2].title),
-                NewsRowType(feedItemTop7[3].title),
+                NewsRowType(feedItemTop7[0].title, feedItemTop7[0].description),
+                NewsRowType(feedItemTop7[1].title, feedItemTop7[1].description),
+                NewsRowType(feedItemTop7[2].title, feedItemTop7[2].description),
+                NewsRowType(feedItemTop7[3].title, feedItemTop7[3].description),
                 HeaderRowType("Last24"),
-                NewsHorizontalRowType(feedItemLast24[0].title),
-                NewsHorizontalRowType(feedItemLast24[1].title),
-                NewsHorizontalRowType(feedItemLast24[2].title),
-                NewsHorizontalRowType(feedItemLast24[3].title),
+                NewsHorizontalRowType(feedItemLast24[0].title, feedItemLast24[0].description),
+                NewsHorizontalRowType(feedItemLast24[1].title, feedItemLast24[1].description),
+                NewsHorizontalRowType(feedItemLast24[2].title, feedItemLast24[2].description),
+                NewsHorizontalRowType(feedItemLast24[3].title, feedItemLast24[3].description),
                 HeaderRowType("All"),
-                NewsHorizontalRowType(feedItemAll[0].title),
-                NewsHorizontalRowType(feedItemAll[1].title),
-                NewsHorizontalRowType(feedItemAll[2].title),
-                NewsHorizontalRowType(feedItemAll[3].title)
+                NewsHorizontalRowType(feedItemAll[0].title, feedItemAll[0].description),
+                NewsHorizontalRowType(feedItemAll[1].title, feedItemAll[1].description),
+                NewsHorizontalRowType(feedItemAll[2].title, feedItemAll[2].description),
+                NewsHorizontalRowType(feedItemAll[3].title, feedItemAll[3].description)
             )
 
             (activity as MainActivity).feedItemTop7 = feedItemTop7
