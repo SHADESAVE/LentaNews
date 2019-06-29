@@ -54,7 +54,15 @@ class MainFragment : Fragment() {
         val activity = v.context as AppCompatActivity
         val bundle = Bundle()
 
-        bundle.putString("link", (activity as MainActivity).mainList[position].getLink())
+        if (position < 5) {
+            bundle.putString("link", (activity as MainActivity).feedItemTop7[position-1].link)
+
+        } else if (position < 10) {
+            bundle.putString("link", (activity as MainActivity).feedItemLast24[position-6].link)
+
+        } else {
+            bundle.putString("link", (activity as MainActivity).feedItemAll[position-11].link)
+        }
         webFragment.setArguments(bundle)
 
         activity.getSupportFragmentManager().beginTransaction().replace(
@@ -111,18 +119,17 @@ class MainFragment : Fragment() {
                 NewsRowType(feedItemTop7[2].title, feedItemTop7[2].description, feedItemTop7[2].link),
                 NewsRowType(feedItemTop7[3].title, feedItemTop7[3].description, feedItemTop7[3].link),
                 HeaderRowType("Last24"),
-                NewsHorizontalRowType(feedItemLast24[0].title, feedItemLast24[0].description),
-                NewsHorizontalRowType(feedItemLast24[1].title, feedItemLast24[1].description),
-                NewsHorizontalRowType(feedItemLast24[2].title, feedItemLast24[2].description),
-                NewsHorizontalRowType(feedItemLast24[3].title, feedItemLast24[3].description),
+                NewsHorizontalRowType(feedItemLast24[0].title, feedItemLast24[0].description, feedItemLast24[0].link),
+                NewsHorizontalRowType(feedItemLast24[1].title, feedItemLast24[1].description, feedItemLast24[1].link),
+                NewsHorizontalRowType(feedItemLast24[2].title, feedItemLast24[2].description, feedItemLast24[2].link),
+                NewsHorizontalRowType(feedItemLast24[3].title, feedItemLast24[3].description, feedItemLast24[3].link),
                 HeaderRowType("All"),
-                NewsHorizontalRowType(feedItemAll[0].title, feedItemAll[0].description),
-                NewsHorizontalRowType(feedItemAll[1].title, feedItemAll[1].description),
-                NewsHorizontalRowType(feedItemAll[2].title, feedItemAll[2].description),
-                NewsHorizontalRowType(feedItemAll[3].title, feedItemAll[3].description)
+                NewsHorizontalRowType(feedItemAll[0].title, feedItemAll[0].description, feedItemAll[0].link),
+                NewsHorizontalRowType(feedItemAll[1].title, feedItemAll[1].description, feedItemAll[1].link),
+                NewsHorizontalRowType(feedItemAll[2].title, feedItemAll[2].description, feedItemAll[2].link),
+                NewsHorizontalRowType(feedItemAll[3].title, feedItemAll[3].description, feedItemAll[3].link)
             )
 
-            (activity as MainActivity).mainList = mainList
             (activity as MainActivity).feedItemTop7 = feedItemTop7
             (activity as MainActivity).feedItemLast24 = feedItemLast24
             (activity as MainActivity).feedItemAll = feedItemAll
@@ -130,7 +137,6 @@ class MainFragment : Fragment() {
 
             val recyclerView: RecyclerView = view!!.findViewById(R.id.main_recycler_view) as RecyclerView
             recyclerView.setHasFixedSize(true)
-
 
             val recyclerViewAdapter = RecyclerViewAdapter(mainList)
             recyclerView.adapter = recyclerViewAdapter

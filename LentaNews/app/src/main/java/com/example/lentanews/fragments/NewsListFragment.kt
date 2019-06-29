@@ -15,11 +15,15 @@ import com.example.lentanews.rowtypes.NewsRowType
 import com.example.lentanews.rowtypes.RowType
 import java.util.ArrayList
 import android.os.AsyncTask
+import android.support.v7.app.AppCompatActivity
 import com.example.rssmodule.FeedItem
 import com.example.rssmodule.ReadRss
 
 
 class NewsListFragment: Fragment() {
+
+    var feedItem = arrayListOf<FeedItem>()
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -28,8 +32,6 @@ class NewsListFragment: Fragment() {
         val bundle: Bundle? = this.arguments
         val header = bundle?.getString("header")
         headerTextView.text = header
-
-        var feedItem = arrayListOf<FeedItem>()
 
         when (header) {
             "Top7" -> feedItem = (activity as MainActivity).feedItemTop7
@@ -46,6 +48,27 @@ class NewsListFragment: Fragment() {
         val recyclerView: RecyclerView = view!!.findViewById(R.id.news_list_recycler_view)
 
         recyclerView.setHasFixedSize(true)
+
+        recyclerView.addOnItemTouchListener(RecyclerTouchListener(context!!, recyclerView, object : RecyclerTouchListener.ClickListener {
+
+            override fun onClick(view: View, position: Int) {
+                val webFragment = WebViewFragment()
+                val activity = view.context as AppCompatActivity
+                val bundle = Bundle()
+
+                bundle.putString("link", feedItem[position].link)
+                webFragment.setArguments(bundle)
+
+                activity.getSupportFragmentManager().beginTransaction().replace(
+                    R.id.fragment_container,
+                    webFragment
+                ).addToBackStack(null).commit()
+            }
+
+            override fun onLongClick(view: View, position: Int) {
+            }
+        }))
+
         val recyclerViewAdapter = RecyclerViewAdapter(newsList)
         recyclerView.adapter = recyclerViewAdapter
 

@@ -19,11 +19,11 @@ class WebViewFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val builder = AlertDialog.Builder(context!!)
-        builder.setView(com.example.lentanews.R.layout.progress_dialog)
-        builder.setCancelable(true);
-        val dialog = builder.create()
-        dialog.show()
+//        val builder = AlertDialog.Builder(context!!)
+//        builder.setView(com.example.lentanews.R.layout.progress_dialog)
+//        builder.setCancelable(true);
+//        val dialog = builder.create()
+//        dialog.show()
 
         val link : String = this.arguments!!.getString("link")
 
@@ -33,14 +33,14 @@ class WebViewFragment : Fragment() {
         mWebView.webViewClient = object : WebViewClient() {
 
             override fun onPageStarted(view: WebView, url: String, favicon: Bitmap?) {
-                view.visibility = View.INVISIBLE
+                //view.visibility = View.INVISIBLE
                 super.onPageStarted(view, url, favicon)
             }
 
             override fun onPageFinished(view: WebView, url: String) {
                 super.onPageFinished(view, url)
-                dialog.dismiss()
-                view.visibility = View.VISIBLE
+                //dialog.dismiss()
+                //view.visibility = View.VISIBLE
             }
 
         }

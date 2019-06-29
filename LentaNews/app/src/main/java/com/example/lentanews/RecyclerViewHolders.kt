@@ -55,6 +55,11 @@ class RecyclerViewHolders {
         init {
             textTittleHoriz = itemView.findViewById(R.id.textTittleHoriz)
             textDescriptionHoriz = itemView.findViewById(R.id.textDescriptionHoriz)
+
+            itemView.setOnClickListener{
+                val mainFragment = MainFragment()
+                mainFragment.onItemClick(itemView, adapterPosition)
+            }
         }
 
     }
