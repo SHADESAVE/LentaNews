@@ -4,15 +4,11 @@ import android.support.v7.widget.RecyclerView
 import com.example.lentanews.RecyclerViewHolders
 
 
-class NewsHorizontalRowType(private val tittle: String, private val description: String, private val itemLink: String) : RowType {
+class NewsHorizontalRowType(private val tittle: String, private val description: String) : RowType {
 
     override fun getItemViewType(): Int {
 
         return RowType.NEWS_HORIZONTAL_ROW_TYPE
-    }
-
-    override fun getLink(): String {
-        return itemLink
     }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {

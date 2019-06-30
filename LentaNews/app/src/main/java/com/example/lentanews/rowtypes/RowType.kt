@@ -9,8 +9,6 @@ interface RowType {
 
     fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position : Int)
 
-    fun getLink(): String
-
     companion object {
         const val HEADER_ROW_TYPE = 0
         const val NEWS_ROW_TYPE = 1

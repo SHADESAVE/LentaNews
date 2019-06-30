@@ -114,20 +114,20 @@ class MainFragment : Fragment() {
             //Обработать size
             val mainList : ArrayList<RowType> = arrayListOf(
                 HeaderRowType("Top7"),
-                NewsRowType(feedItemTop7[0].title, feedItemTop7[0].description, feedItemTop7[0].link),
-                NewsRowType(feedItemTop7[1].title, feedItemTop7[1].description, feedItemTop7[1].link),
-                NewsRowType(feedItemTop7[2].title, feedItemTop7[2].description, feedItemTop7[2].link),
-                NewsRowType(feedItemTop7[3].title, feedItemTop7[3].description, feedItemTop7[3].link),
+                NewsRowType(feedItemTop7[0].title, feedItemTop7[0].description, feedItemTop7[0].imageUrl),
+                NewsRowType(feedItemTop7[1].title, feedItemTop7[1].description, feedItemTop7[1].imageUrl),
+                NewsRowType(feedItemTop7[2].title, feedItemTop7[2].description, feedItemTop7[2].imageUrl),
+                NewsRowType(feedItemTop7[3].title, feedItemTop7[3].description, feedItemTop7[3].imageUrl),
                 HeaderRowType("Last24"),
-                NewsHorizontalRowType(feedItemLast24[0].title, feedItemLast24[0].description, feedItemLast24[0].link),
-                NewsHorizontalRowType(feedItemLast24[1].title, feedItemLast24[1].description, feedItemLast24[1].link),
-                NewsHorizontalRowType(feedItemLast24[2].title, feedItemLast24[2].description, feedItemLast24[2].link),
-                NewsHorizontalRowType(feedItemLast24[3].title, feedItemLast24[3].description, feedItemLast24[3].link),
+                NewsHorizontalRowType(feedItemLast24[0].title, feedItemLast24[0].description),
+                NewsHorizontalRowType(feedItemLast24[1].title, feedItemLast24[1].description),
+                NewsHorizontalRowType(feedItemLast24[2].title, feedItemLast24[2].description),
+                NewsHorizontalRowType(feedItemLast24[3].title, feedItemLast24[3].description),
                 HeaderRowType("All"),
-                NewsHorizontalRowType(feedItemAll[0].title, feedItemAll[0].description, feedItemAll[0].link),
-                NewsHorizontalRowType(feedItemAll[1].title, feedItemAll[1].description, feedItemAll[1].link),
-                NewsHorizontalRowType(feedItemAll[2].title, feedItemAll[2].description, feedItemAll[2].link),
-                NewsHorizontalRowType(feedItemAll[3].title, feedItemAll[3].description, feedItemAll[3].link)
+                NewsHorizontalRowType(feedItemAll[0].title, feedItemAll[0].description),
+                NewsHorizontalRowType(feedItemAll[1].title, feedItemAll[1].description),
+                NewsHorizontalRowType(feedItemAll[2].title, feedItemAll[2].description),
+                NewsHorizontalRowType(feedItemAll[3].title, feedItemAll[3].description)
             )
 
             (activity as MainActivity).feedItemTop7 = feedItemTop7

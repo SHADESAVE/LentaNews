@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.widget.TextView import android.view.View
 import android.widget.AdapterView
 import android.widget.Button
+import android.widget.ImageView
 import com.example.lentanews.fragments.MainFragment
 import com.example.lentanews.rowtypes.NewsRowType
 import com.example.lentanews.rowtypes.RowType
@@ -34,10 +35,12 @@ class RecyclerViewHolders {
 
         val textTittle: TextView
         val textDescription: TextView
+        val imageView: ImageView
 
         init {
             textTittle = itemView.findViewById(R.id.textTittle)
             textDescription = itemView.findViewById(R.id.textDescription)
+            imageView = itemView.findViewById(R.id.imageView)
 
             itemView.setOnClickListener{
                 val mainFragment = MainFragment()

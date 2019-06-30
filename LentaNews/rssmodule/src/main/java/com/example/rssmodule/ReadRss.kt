@@ -44,9 +44,11 @@ class ReadRss(){
                             item.pubDate = (cureent.getTextContent())
                         } else if (cureent.getNodeName().equals("link", ignoreCase = true)) {
                             item.link = (cureent.getTextContent())
-                        } else if (cureent.getNodeName().equals("image", ignoreCase = true)) {
+                            //Log.d("loadFeedLink", "url: " + item.link)
+                        } else if (cureent.getNodeName().equals("enclosure", ignoreCase = true)) {
                             val url = cureent.getAttributes().item(0).getTextContent()
                             item.imageUrl = (url)
+                            Log.d("loadImageUrl", "url: " + item.imageUrl)
                         }
                     }
                     feedItems.add(item)

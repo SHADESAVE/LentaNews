@@ -42,7 +42,7 @@ class NewsListFragment: Fragment() {
 
         val newsList: ArrayList<RowType> = arrayListOf()
         for (i in 0..feedItem!!.size - 1) {
-            newsList.add(NewsRowType(feedItem[i].title, feedItem[i].description, feedItem[i].link))
+            newsList.add(NewsRowType(feedItem[i].title, feedItem[i].description, feedItem[i].imageUrl))
         }
 
         val recyclerView: RecyclerView = view!!.findViewById(R.id.news_list_recycler_view)
