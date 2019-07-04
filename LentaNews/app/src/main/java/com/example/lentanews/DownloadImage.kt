@@ -12,7 +12,7 @@ import java.net.MalformedURLException
 import java.net.URL
 
 
-class GetImage(imv: ImageView) : AsyncTask<String, Void, Bitmap>() {
+class DownloadImage(imv: ImageView) : AsyncTask<String, Void, Bitmap>() {
     private val imageview: WeakReference<ImageView>?
 
     init {

@@ -38,9 +38,9 @@ class MainFragment : Fragment() {
         val bundle = Bundle()
 
         bundle.putString("header", text)
-        newsListFragment.setArguments(bundle)
+        newsListFragment.arguments = bundle
 
-        activity.getSupportFragmentManager().beginTransaction().replace(
+        activity.supportFragmentManager.beginTransaction().replace(
             R.id.fragment_container,
             newsListFragment
         ).addToBackStack(null).commit()
@@ -111,10 +111,10 @@ class MainFragment : Fragment() {
             //Обработать size
             val mainList : ArrayList<RowType> = arrayListOf(
                 HeaderRowType("Top7"),
-                NewsRowType(feedItemTop7[0].title, feedItemTop7[0].description, feedItemTop7[0].imageUrl),
-                NewsRowType(feedItemTop7[1].title, feedItemTop7[1].description, feedItemTop7[1].imageUrl),
-                NewsRowType(feedItemTop7[2].title, feedItemTop7[2].description, feedItemTop7[2].imageUrl),
-                NewsRowType(feedItemTop7[3].title, feedItemTop7[3].description, feedItemTop7[3].imageUrl),
+                NewsRowType(feedItemTop7[0].title, feedItemTop7[0].description, feedItemTop7[0].imageUrl, feedItemTop7[0].pubDate),
+                NewsRowType(feedItemTop7[1].title, feedItemTop7[1].description, feedItemTop7[1].imageUrl, feedItemTop7[1].pubDate),
+                NewsRowType(feedItemTop7[2].title, feedItemTop7[2].description, feedItemTop7[2].imageUrl, feedItemTop7[2].pubDate),
+                NewsRowType(feedItemTop7[3].title, feedItemTop7[3].description, feedItemTop7[3].imageUrl, feedItemTop7[3].pubDate),
                 HeaderRowType("Last24"),
                 NewsHorizontalRowType(feedItemLast24[0].title, feedItemLast24[0].description, feedItemLast24[0].imageUrl),
                 NewsHorizontalRowType(feedItemLast24[1].title, feedItemLast24[1].description, feedItemLast24[1].imageUrl),

@@ -36,19 +36,17 @@ class ReadRss(){
 
                         val cureent = itemchilds.item(j)
 
-                        if (cureent.getNodeName().equals("title", ignoreCase = true)) {
-                            item.title = (cureent.getTextContent())
-                        } else if (cureent.getNodeName().equals("description", ignoreCase = true)) {
-                            item.description = (cureent.getTextContent())
-                        } else if (cureent.getNodeName().equals("pubDate", ignoreCase = true)) {
-                            item.pubDate = (cureent.getTextContent())
-                        } else if (cureent.getNodeName().equals("link", ignoreCase = true)) {
-                            item.link = (cureent.getTextContent())
+                        when {
+                            cureent.nodeName.equals("title", ignoreCase = true) -> item.title = (cureent.textContent)
+                            cureent.nodeName.equals("description", ignoreCase = true) -> item.description = (cureent.textContent)
+                            cureent.nodeName.equals("pubDate", ignoreCase = true) -> item.pubDate = (cureent.textContent)
+                            cureent.nodeName.equals("link", ignoreCase = true) -> item.link = (cureent.textContent)
                             //Log.d("loadFeedLink", "url: " + item.link)
-                        } else if (cureent.getNodeName().equals("enclosure", ignoreCase = true)) {
-                            val url = cureent.getAttributes().item(0).getTextContent()
-                            item.imageUrl = (url)
-                            Log.d("loadImageUrl", "url: " + item.imageUrl)
+                            cureent.nodeName.equals("enclosure", ignoreCase = true) -> {
+                                val url = cureent.attributes.item(0).textContent
+                                item.imageUrl = (url)
+                                Log.d("loadImageUrl", "url: " + item.imageUrl)
+                            }
                         }
                     }
                     feedItems.add(item)

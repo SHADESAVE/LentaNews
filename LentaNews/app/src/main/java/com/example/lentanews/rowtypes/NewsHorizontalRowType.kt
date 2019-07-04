@@ -1,7 +1,7 @@
 package com.example.lentanews.rowtypes
 
 import android.support.v7.widget.RecyclerView
-import com.example.lentanews.GetImage
+import com.example.lentanews.DownloadImage
 import com.example.lentanews.RecyclerViewHolders
 
 
@@ -16,7 +16,7 @@ class NewsHorizontalRowType(private val tittle: String, private val description:
 
         val textViewHolder = viewHolder as RecyclerViewHolders.NewsHorizontalViewHolder
 
-        val getImage = GetImage(textViewHolder.imageView)
+        val getImage = DownloadImage(textViewHolder.imageView)
         getImage.execute(imageUrl)
 
         textViewHolder.textTittleHoriz.setText(tittle)

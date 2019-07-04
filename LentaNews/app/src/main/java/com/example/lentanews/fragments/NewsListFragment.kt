@@ -41,8 +41,8 @@ class NewsListFragment: Fragment() {
         }
 
         val newsList: ArrayList<RowType> = arrayListOf()
-        for (i in 0..feedItem!!.size - 1) {
-            newsList.add(NewsRowType(feedItem[i].title, feedItem[i].description, feedItem[i].imageUrl))
+        for (i in 0 until feedItem.size) {
+            newsList.add(NewsRowType(feedItem[i].title, feedItem[i].description, feedItem[i].imageUrl, feedItem[i].pubDate))
         }
 
         val recyclerView: RecyclerView = view!!.findViewById(R.id.news_list_recycler_view)
@@ -57,9 +57,9 @@ class NewsListFragment: Fragment() {
                 val bundle = Bundle()
 
                 bundle.putString("link", feedItem[position].link)
-                webFragment.setArguments(bundle)
+                webFragment.arguments = bundle
 
-                activity.getSupportFragmentManager().beginTransaction().replace(
+                activity.supportFragmentManager.beginTransaction().replace(
                     R.id.fragment_container,
                     webFragment
                 ).addToBackStack(null).commit()

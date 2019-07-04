@@ -17,13 +17,10 @@ class RecyclerViewHolders {
 
     class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var headerTextView: TextView
-        var button: Button
+        var headerTextView: TextView = itemView.findViewById(R.id.headers)
+        var button: Button = itemView.findViewById(R.id.buttonView) as Button
 
         init {
-            headerTextView = itemView.findViewById(R.id.headers)
-            button = itemView.findViewById(R.id.buttonView) as Button
-
             button.setOnClickListener {
                 val mainFragment = MainFragment()
                 mainFragment.onClick(itemView, headerTextView.text as String)
@@ -33,15 +30,12 @@ class RecyclerViewHolders {
 
     class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val textTittle: TextView
-        val textDescription: TextView
-        val imageView: ImageView
+        val textTittle: TextView = itemView.findViewById(R.id.textTittle)
+        val textDescription: TextView = itemView.findViewById(R.id.textDescription)
+        val imageView: ImageView = itemView.findViewById(R.id.imageView)
+        val textDate: TextView = itemView.findViewById(R.id.date_text)
 
         init {
-            textTittle = itemView.findViewById(R.id.textTittle)
-            textDescription = itemView.findViewById(R.id.textDescription)
-            imageView = itemView.findViewById(R.id.imageView)
-
             itemView.setOnClickListener{
                 val mainFragment = MainFragment()
                 mainFragment.onItemClick(itemView, adapterPosition)
@@ -52,16 +46,11 @@ class RecyclerViewHolders {
 
     class NewsHorizontalViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val textTittleHoriz: TextView
-        val textDescriptionHoriz: TextView
-        val imageView: ImageView
+        val textTittleHoriz: TextView = itemView.findViewById(R.id.textTittleHoriz)
+        val textDescriptionHoriz: TextView = itemView.findViewById(R.id.textDescriptionHoriz)
+        val imageView: ImageView = itemView.findViewById(R.id.imageViewHoriz)
 
         init {
-            textTittleHoriz = itemView.findViewById(R.id.textTittleHoriz)
-            textDescriptionHoriz = itemView.findViewById(R.id.textDescriptionHoriz)
-            imageView = itemView.findViewById(R.id.imageViewHoriz)
-
-
             itemView.setOnClickListener{
                 val mainFragment = MainFragment()
                 mainFragment.onItemClick(itemView, adapterPosition)
