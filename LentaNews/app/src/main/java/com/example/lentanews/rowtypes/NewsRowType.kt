@@ -2,11 +2,12 @@ package com.example.lentanews.rowtypes
 
 import android.support.v7.widget.RecyclerView
 import android.util.Log
-import com.example.lentanews.DownloadImage
+import android.view.View
+import com.example.lentanews.async.DownloadImage
 import com.example.lentanews.RecyclerViewHolders
 
 
-class NewsRowType(private val tittle: String, private val description: String, private val imageLink: String, private val date: String): RowType {
+class NewsRowType(private val tittle: String, private val description: String, private val imageLink: String, private val date: String, val link: String): RowType {
 
     override fun getItemViewType(): Int {
 
@@ -17,13 +18,11 @@ class NewsRowType(private val tittle: String, private val description: String, p
 
         Log.d("imageUrl", "url: $imageLink")
         val textViewHolder = viewHolder as RecyclerViewHolders.NewsViewHolder
-        //textViewHolder.imageView.setImageDrawable (null)
-        //textViewHolder.imageView.context.
-        //textViewHolder.imageView.setVisibility(View.GONE)
-        val getImage = DownloadImage(textViewHolder.imageView)
-        //getImage.cancel(true)
-        getImage.execute(imageLink)
-        //textViewHolder.imageView.setVisibility(View.VISIBLE)
+        val downloadImage = DownloadImage(textViewHolder.imageView)
+        downloadImage.execute(imageLink)
+
+        viewHolder.imageView
+        textViewHolder.click(link)
         textViewHolder.textDate.text = date
         textViewHolder.textTittle.text = tittle
         textViewHolder.textDescription.text = description

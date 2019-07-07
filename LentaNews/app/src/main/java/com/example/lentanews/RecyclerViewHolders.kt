@@ -1,5 +1,7 @@
 package com.example.lentanews
 
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.support.v7.widget.RecyclerView
@@ -8,8 +10,15 @@ import android.widget.AdapterView
 import android.widget.Button
 import android.widget.ImageView
 import com.example.lentanews.fragments.MainFragment
+import com.example.lentanews.fragments.NewsListFragment
 import com.example.lentanews.rowtypes.NewsRowType
 import com.example.lentanews.rowtypes.RowType
+import android.R.attr.button
+import com.example.lentanews.async.DownloadImage
+import com.example.lentanews.fragments.WebViewFragment
+import kotlinx.android.synthetic.main.recycler_view_news.view.*
+import android.os.AsyncTask.execute
+
 
 
 
@@ -22,8 +31,17 @@ class RecyclerViewHolders {
 
         init {
             button.setOnClickListener {
-                val mainFragment = MainFragment()
-                mainFragment.onClick(itemView, headerTextView.text as String)
+                val newsListFragment = NewsListFragment()
+                val activity = itemView.context as AppCompatActivity
+                val bundle = Bundle()
+
+                bundle.putString("header", headerTextView.text.toString())
+                newsListFragment.arguments = bundle
+
+                activity.supportFragmentManager.beginTransaction().replace(
+                    R.id.fragment_container,
+                    newsListFragment
+                ).addToBackStack(null).commit()
             }
         }
     }
@@ -35,13 +53,20 @@ class RecyclerViewHolders {
         val imageView: ImageView = itemView.findViewById(R.id.imageView)
         val textDate: TextView = itemView.findViewById(R.id.date_text)
 
-        init {
-            itemView.setOnClickListener{
-                val mainFragment = MainFragment()
-                mainFragment.onItemClick(itemView, adapterPosition)
+        fun click(link: String) {
+            itemView.setOnClickListener {
+                val webFragment = WebViewFragment()
+                val activity = itemView.context as AppCompatActivity
+                val bundle = Bundle()
+                bundle.putString("link", link)
+                webFragment.arguments = bundle
+
+                activity.getSupportFragmentManager().beginTransaction().replace(
+                    R.id.fragment_container,
+                    webFragment
+                ).addToBackStack(null).commit()
             }
         }
-
     }
 
     class NewsHorizontalViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -50,14 +75,24 @@ class RecyclerViewHolders {
         val textDescriptionHoriz: TextView = itemView.findViewById(R.id.textDescriptionHoriz)
         val imageView: ImageView = itemView.findViewById(R.id.imageViewHoriz)
 
-        init {
-            itemView.setOnClickListener{
-                val mainFragment = MainFragment()
-                mainFragment.onItemClick(itemView, adapterPosition)
+        fun click(link: String) {
+            itemView.setOnClickListener {
+                val webFragment = WebViewFragment()
+                val activity = itemView.context as AppCompatActivity
+                val bundle = Bundle()
+                bundle.putString("link", link)
+                webFragment.arguments = bundle
+
+                activity.getSupportFragmentManager().beginTransaction().replace(
+                    R.id.fragment_container,
+                    webFragment
+                ).addToBackStack(null).commit()
             }
         }
 
     }
+
+
 
     fun create(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
