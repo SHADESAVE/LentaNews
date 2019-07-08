@@ -52,6 +52,7 @@ class RecyclerViewHolders {
         val textDescription: TextView = itemView.findViewById(R.id.textDescription)
         val imageView: ImageView = itemView.findViewById(R.id.imageView)
         val textDate: TextView = itemView.findViewById(R.id.date_text)
+        var imageTask: DownloadImage? = null
 
         fun click(link: String) {
             itemView.setOnClickListener {
@@ -61,7 +62,7 @@ class RecyclerViewHolders {
                 bundle.putString("link", link)
                 webFragment.arguments = bundle
 
-                activity.getSupportFragmentManager().beginTransaction().replace(
+                activity.supportFragmentManager.beginTransaction().replace(
                     R.id.fragment_container,
                     webFragment
                 ).addToBackStack(null).commit()
@@ -74,6 +75,7 @@ class RecyclerViewHolders {
         val textTittleHoriz: TextView = itemView.findViewById(R.id.textTittleHoriz)
         val textDescriptionHoriz: TextView = itemView.findViewById(R.id.textDescriptionHoriz)
         val imageView: ImageView = itemView.findViewById(R.id.imageViewHoriz)
+        var imageTask: DownloadImage? = null
 
         fun click(link: String) {
             itemView.setOnClickListener {
@@ -83,7 +85,7 @@ class RecyclerViewHolders {
                 bundle.putString("link", link)
                 webFragment.arguments = bundle
 
-                activity.getSupportFragmentManager().beginTransaction().replace(
+                activity.supportFragmentManager.beginTransaction().replace(
                     R.id.fragment_container,
                     webFragment
                 ).addToBackStack(null).commit()

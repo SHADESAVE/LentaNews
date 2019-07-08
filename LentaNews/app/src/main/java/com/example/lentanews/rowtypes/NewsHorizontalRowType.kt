@@ -14,8 +14,8 @@ class NewsHorizontalRowType(private val tittle: String, private val description:
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         val textViewHolder = viewHolder as RecyclerViewHolders.NewsHorizontalViewHolder
-        val getImage = DownloadImage(textViewHolder.imageView)
-        getImage.execute(imageUrl)
+        textViewHolder.imageTask = DownloadImage(textViewHolder.imageView)
+        textViewHolder.imageTask!!.execute(imageUrl)
         textViewHolder.click(link)
         textViewHolder.textTittleHoriz.text = tittle
         textViewHolder.textDescriptionHoriz.text = description

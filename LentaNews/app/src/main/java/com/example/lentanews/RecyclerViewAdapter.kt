@@ -1,13 +1,18 @@
 package com.example.lentanews
 
 import android.content.Context
+import android.inputmethodservice.Keyboard
 import android.support.v4.app.FragmentActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import com.example.lentanews.rowtypes.NewsHorizontalRowType
+import com.example.lentanews.rowtypes.NewsRowType
 import com.example.lentanews.rowtypes.RowType
+import com.example.lentanews.rowtypes.RowType.Companion.NEWS_HORIZONTAL_ROW_TYPE
+import com.example.lentanews.rowtypes.RowType.Companion.NEWS_ROW_TYPE
 import com.example.rssmodule.FeedItem
 import kotlinx.android.synthetic.main.recycler_view_news.view.*
 
@@ -30,9 +35,19 @@ class RecyclerViewAdapter(private val dataSet: List<RowType>) : RecyclerView.Ada
         return dataSet.size
     }
     override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+        if (holder.itemViewType == NEWS_ROW_TYPE) {
+            (holder as RecyclerViewHolders.NewsViewHolder).imageView.setImageBitmap(null)
+            holder.imageTask!!.cancel(true)
+            Log.d("key", "1")
+        }
+        if (holder.itemViewType == NEWS_HORIZONTAL_ROW_TYPE) {
+            (holder as RecyclerViewHolders.NewsHorizontalViewHolder).imageView.setImageBitmap(null)
+            holder.imageTask!!.cancel(true)
+            Log.d("key", "2")
+        }
         super.onViewRecycled(holder)
-        holder.itemViewType
     }
+
     fun getLayoutManager(context: Context): GridLayoutManager {
         val layoutManager = GridLayoutManager(context, 2)
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
