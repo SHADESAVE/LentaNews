@@ -39,7 +39,7 @@ class ReadRss(){
                         when {
                             cureent.nodeName.equals("title", ignoreCase = true) -> item.title = (cureent.textContent)
                             cureent.nodeName.equals("description", ignoreCase = true) -> item.description = (cureent.textContent)
-                            cureent.nodeName.equals("pubDate", ignoreCase = true) -> item.pubDate = (cureent.textContent)
+                            cureent.nodeName.equals("pubDate", ignoreCase = true) -> item.pubDate = (cureent.textContent).substring(0, (cureent.textContent).length-9)
                             cureent.nodeName.equals("link", ignoreCase = true) -> item.link = (cureent.textContent)
                             //Log.d("loadFeedLink", "url: " + item.link)
                             cureent.nodeName.equals("enclosure", ignoreCase = true) -> {

@@ -76,6 +76,7 @@ class RecyclerViewHolders {
         val textDescriptionHoriz: TextView = itemView.findViewById(R.id.textDescriptionHoriz)
         val imageView: ImageView = itemView.findViewById(R.id.imageViewHoriz)
         var imageTask: DownloadImage? = null
+        val textDate: TextView = itemView.findViewById(R.id.date_text_horiz)
 
         fun click(link: String) {
             itemView.setOnClickListener {

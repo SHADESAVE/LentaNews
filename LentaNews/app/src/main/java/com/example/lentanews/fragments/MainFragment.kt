@@ -44,15 +44,15 @@ class MainFragment : Fragment() {
                 NewsRowType(news.top7[2].title, news.top7[2].description, news.top7[2].imageUrl, news.top7[2].pubDate, news.top7[2].link),
                 NewsRowType(news.top7[3].title, news.top7[3].description, news.top7[3].imageUrl, news.top7[3].pubDate, news.top7[3].link),
                 HeaderRowType("Last24"),
-                NewsHorizontalRowType(news.last24[0].title, news.last24[0].description, news.last24[0].imageUrl, news.last24[0].link),
-                NewsHorizontalRowType(news.last24[1].title, news.last24[1].description, news.last24[1].imageUrl, news.last24[1].link),
-                NewsHorizontalRowType(news.last24[2].title, news.last24[2].description, news.last24[2].imageUrl, news.last24[2].link),
-                NewsHorizontalRowType(news.last24[3].title, news.last24[3].description, news.last24[3].imageUrl, news.last24[3].link),
+                NewsHorizontalRowType(news.last24[0].title, news.last24[0].description, news.last24[0].imageUrl, news.last24[0].link, news.last24[0].pubDate),
+                NewsHorizontalRowType(news.last24[1].title, news.last24[1].description, news.last24[1].imageUrl, news.last24[1].link, news.last24[1].pubDate),
+                NewsHorizontalRowType(news.last24[2].title, news.last24[2].description, news.last24[2].imageUrl, news.last24[2].link, news.last24[2].pubDate),
+                NewsHorizontalRowType(news.last24[3].title, news.last24[3].description, news.last24[3].imageUrl, news.last24[3].link, news.last24[3].pubDate),
                 HeaderRowType("All"),
-                NewsHorizontalRowType(news.all[0].title, news.all[0].description, news.all[0].imageUrl, news.all[0].link),
-                NewsHorizontalRowType(news.all[1].title, news.all[1].description, news.all[1].imageUrl, news.all[1].link),
-                NewsHorizontalRowType(news.all[2].title, news.all[2].description, news.all[2].imageUrl, news.all[2].link),
-                NewsHorizontalRowType(news.all[3].title, news.all[3].description, news.all[3].imageUrl, news.all[3].link)
+                NewsHorizontalRowType(news.all[0].title, news.all[0].description, news.all[0].imageUrl, news.all[0].link, news.all[0].pubDate),
+                NewsHorizontalRowType(news.all[1].title, news.all[1].description, news.all[1].imageUrl, news.all[1].link, news.all[1].pubDate),
+                NewsHorizontalRowType(news.all[2].title, news.all[2].description, news.all[2].imageUrl, news.all[2].link, news.all[2].pubDate),
+                NewsHorizontalRowType(news.all[3].title, news.all[3].description, news.all[3].imageUrl, news.all[3].link, news.all[3].pubDate)
         )
     }
 }

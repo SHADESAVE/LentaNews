@@ -5,7 +5,7 @@ import com.example.lentanews.async.DownloadImage
 import com.example.lentanews.RecyclerViewHolders
 
 
-class NewsHorizontalRowType(private val tittle: String, private val description: String, private val imageUrl: String, val link: String) : RowType {
+class NewsHorizontalRowType(private val tittle: String, private val description: String, private val imageUrl: String, private val link: String, private val date: String) : RowType {
 
     override fun getItemViewType(): Int {
 
@@ -16,6 +16,7 @@ class NewsHorizontalRowType(private val tittle: String, private val description:
         val textViewHolder = viewHolder as RecyclerViewHolders.NewsHorizontalViewHolder
         textViewHolder.imageTask = DownloadImage(textViewHolder.imageView)
         textViewHolder.imageTask!!.execute(imageUrl)
+        textViewHolder.textDate.text = date
         textViewHolder.click(link)
         textViewHolder.textTittleHoriz.text = tittle
         textViewHolder.textDescriptionHoriz.text = description
