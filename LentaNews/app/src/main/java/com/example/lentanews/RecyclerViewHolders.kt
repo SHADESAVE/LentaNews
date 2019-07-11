@@ -5,10 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.support.v7.widget.RecyclerView
-import android.widget.TextView import android.view.View
-import android.widget.AdapterView
-import android.widget.Button
-import android.widget.ImageView
+import android.view.View
 import com.example.lentanews.fragments.MainFragment
 import com.example.lentanews.fragments.NewsListFragment
 import com.example.lentanews.rowtypes.NewsRowType
@@ -18,8 +15,7 @@ import com.example.lentanews.async.DownloadImage
 import com.example.lentanews.fragments.WebViewFragment
 import kotlinx.android.synthetic.main.recycler_view_news.view.*
 import android.os.AsyncTask.execute
-
-
+import android.widget.*
 
 
 class RecyclerViewHolders {
@@ -53,6 +49,7 @@ class RecyclerViewHolders {
         val imageView: ImageView = itemView.findViewById(R.id.imageView)
         val textDate: TextView = itemView.findViewById(R.id.date_text)
         var imageTask: DownloadImage? = null
+        val progressBar: ProgressBar = itemView.findViewById(R.id.progressBar)
 
         fun click(link: String) {
             itemView.setOnClickListener {
@@ -77,6 +74,7 @@ class RecyclerViewHolders {
         val imageView: ImageView = itemView.findViewById(R.id.imageViewHoriz)
         var imageTask: DownloadImage? = null
         val textDate: TextView = itemView.findViewById(R.id.date_text_horiz)
+        val progressBar: ProgressBar = itemView.findViewById(R.id.progressBarHoriz)
 
         fun click(link: String) {
             itemView.setOnClickListener {

@@ -1,10 +1,19 @@
 package com.example.lentanews.async
 
+import android.content.Context
 import android.os.AsyncTask
+import android.support.v7.app.AlertDialog
+import com.example.lentanews.R
 import com.example.rssmodule.ReadRss
 
-class DownloadNews: AsyncTask<Void, Void, ResultNewsData>() {
 
+class DownloadNews(builder: AlertDialog.Builder) : AsyncTask<Void, Void, ResultNewsData>() {
+    val dialog = builder.create()
+
+    override fun onPreExecute() {
+        dialog.show()
+        super.onPreExecute()
+    }
     private val rssParserTop7 = ReadRss()
     private val rssParserLast24 = ReadRss()
     private val rssParserAll = ReadRss()
@@ -17,5 +26,10 @@ class DownloadNews: AsyncTask<Void, Void, ResultNewsData>() {
             rssParserLast24.getFeedItemts(),
             rssParserAll.getFeedItemts()
         )
+    }
+
+    override fun onPostExecute(result: ResultNewsData?) {
+        dialog.dismiss()
+        super.onPostExecute(result)
     }
 }

@@ -18,7 +18,7 @@ class NewsRowType(private val tittle: String, private val description: String, p
 
         Log.d("imageUrl", "url: $imageLink")
         val textViewHolder = viewHolder as RecyclerViewHolders.NewsViewHolder
-        textViewHolder.imageTask = DownloadImage(textViewHolder.imageView)
+        textViewHolder.imageTask = DownloadImage(textViewHolder.imageView, textViewHolder.progressBar)
         textViewHolder.imageTask!!.execute(imageLink)
         textViewHolder.click(link)
         textViewHolder.textDate.text = date
